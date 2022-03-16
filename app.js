@@ -3,6 +3,54 @@
 //  hours
 let hours = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 
+class Stores{
+  constructor(name, min, max, avg){
+    this.name = name;
+    this.min = min;
+    this.max = max;
+    this.avg = avg;
+  }
+}
+
+const Seattle = new Stores('Seattle', 23, 65, 6.3);
+const Tokyo = new Stores('Tokyo', 3, 24, 1.2);
+const Dubai = new Stores('Dubai', 11, 38, 3.7);
+const Paris = new Stores('Paris', 20, 38, 2.3);
+const Lima = new Stores('Lima', 2, 16, 4.6);
+
+function {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let seattle = {
   storeName: 'Seattle',
   min: 23,
