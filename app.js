@@ -2,301 +2,88 @@
 
 //  hours
 let hours = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
-
+let allStores = [];
 class Stores{
   constructor(name, min, max, avg){
     this.name = name;
     this.min = min;
     this.max = max;
     this.avg = avg;
+    this.cookies = [];
+    this.customer = [];
+    this.total = 0;
+    allStores.push(this);
   }
 }
 
-const Seattle = new Stores('Seattle', 23, 65, 6.3);
-const Tokyo = new Stores('Tokyo', 3, 24, 1.2);
-const Dubai = new Stores('Dubai', 11, 38, 3.7);
-const Paris = new Stores('Paris', 20, 38, 2.3);
-const Lima = new Stores('Lima', 2, 16, 4.6);
-
-function {
-
-}
+new Stores('Seattle', 23, 65, 6.3);
+new Stores('Tokyo', 3, 24, 1.2);
+new Stores('Dubai', 11, 38, 3.7);
+new Stores('Paris', 20, 38, 2.3);
+new Stores('Lima', 2, 16, 4.6);
 
 
+Stores.prototype.custAvg = function (){ // this function gives avg cust/hr
+  for (let i = 0; i < hours.length; i++){
+    // loop thru array
+    this.customer.push(Math.floor(Math.random() * (this.max - this.min) + this.min));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-let seattle = {
-  storeName: 'Seattle',
-  min: 23,
-  max: 65,
-  avg: 6.3,
-  customer:[], // avg/hour
-  cookies: [], // number of cookies
-  total: 0,
-  custAvg: function (){ // this function gives avg cust/hr
-    for (let i = 0; i < hours.length; i++){
-      // loop thru array
-      this.customer.push(Math.floor(Math.random() * (this.max - this.min) + this.min));
-
-    }
-  },
-  avgCookies: function(){ // gives avg cookies sold/hr per customer
-    this.custAvg();
-    for (let i = 0; i < hours.length; i++){
-      let custAvg = Math.ceil(this.customer[i] * this.avg);
-      this.cookies.push(custAvg);
-      this.total = this.total + custAvg; // += can be replaced with + custAvg
-
-    }
-  },
-
-  render: function(){
-    this.avgCookies();
-    let base = document.getElementById('cities');
-    let city = document.createElement('ul');
-    base.appendChild(city);
-    let cityName = document.createElement('h1');
-    cityName.textContent = this.storeName;
-    city.appendChild(cityName);
-    for(let i = 0; i < hours.length; i++){
-      let listItems = document.createElement('li'); // created loop and list items
-      listItems.textContent = hours[i] + ' : ' + this.cookies[i] + ' cookies';
-      city.appendChild(listItems);
-
-    }
-
-    let finalTotal = document.createElement('li');
-    finalTotal.textContent = 'total: ' + this.total;
-    city.appendChild(finalTotal);
   }
+},
+Stores.prototype.avgCookies = function(){ // gives avg cookies sold/hr per customer
+  this.custAvg();
+  for (let i = 0; i < hours.length; i++){
+    let custAvg = Math.ceil(this.customer[i] * this.avg);
+    this.cookies.push(custAvg);
+    this.total = this.total + custAvg; // += can be replaced with + custAvg
+
+  }
+},
+
+
+Stores.prototype.render = function(){
+  this.avgCookies();
+  let base = document.getElementById('stores');
+  let trElem = document.createElement('tr');
+  let tdElem = document.createElement('td');
+  base.appendChild(trElem);
+  tdElem.textContent = (this.name);
+  trElem.appendChild(tdElem);
+  for(let i = 0; i < hours.length; i++){
+    let tdElem2 = document.createElement('td');
+    tdElem2.textContent = this.cookies[i];
+    trElem.appendChild(tdElem2);
+  }
+  let totals = document.createElement('td');
+  totals.textContent = this.total;
+  trElem.appendChild(totals);
 };
-seattle.render();
-console.log(seattle.customer);
-console.log(seattle.total);
 
-
-let tokyo = {
-  storeName: 'Tokyo',
-  min: 3,
-  max: 24,
-  avg: 1.2,
-  customer:[], // avg/hour
-  cookies: [], // number of cookies
-  total: 0,
-  custAvg: function (){ // this function gives avg cust/hr
-    for (let i = 0; i < hours.length; i++){
-      // loop thru array
-      this.customer.push(Math.floor(Math.random() * (this.max - this.min) + this.min));
-
-    }
-  },
-  avgCookies: function(){ // gives avg cookies sold/hr per customer
-    this.custAvg();
-    for (let i = 0; i < hours.length; i++){
-      let custAvg = Math.ceil(this.customer[i] * this.avg);
-      this.cookies.push(custAvg);
-      this.total = this.total + custAvg; // += can be replaced with + custAvg
-
-    }
-  },
-
-  render: function(){
-    this.avgCookies();
-    let base = document.getElementById('cities');
-    let city = document.createElement('ul');
-    base.appendChild(city);
-    let cityName2 = document.createElement('h1');
-    cityName2.textContent = this.storeName;
-    //console.log(cityName2);
-    city.appendChild(cityName2);
-    for(let i = 0; i < hours.length; i++){
-      let listItems = document.createElement('li'); // created loop and list items
-      listItems.textContent = hours[i] + ' : ' + this.cookies[i] + ' cookies';
-      city.appendChild(listItems);
-
-    }
-
-    let finalTotal = document.createElement('li');
-    finalTotal.textContent = 'total: ' + this.total;
-    city.appendChild(finalTotal);
+function makeTableHead(){
+  let tHeadMain = document.getElementById('stores');
+  let th1 = document.createElement('th');
+  let trElem = document.createElement('tr');
+  tHeadMain.appendChild(trElem);
+  th1.textContent = 'location';
+  trElem.appendChild(th1);
+  let hourCount = hours.length;
+  for(let i = 0; i < hourCount; i++){
+    let thElem2 = document.createElement('th');
+    thElem2.textContent = hours[i];
+    trElem.appendChild(thElem2);
   }
+  let totals = document.createElement('td');
+  totals.textContent = ('Totals');
+  trElem.appendChild(totals);
 }
-tokyo.render();
-console.log(tokyo.customer);
-console.log(tokyo.total);
-
-let dubai = {
-  storeName: 'Dubai',
-  min: 11,
-  max: 38,
-  avg: 3.7,
-  customer:[], // avg/hour
-  cookies: [], // number of cookies
-  total: 0,
-  custAvg: function (){ // this function gives avg cust/hr
-    for (let i = 0; i < hours.length; i++){
-      // loop thru array
-      this.customer.push(Math.floor(Math.random() * (this.max - this.min) + this.min));
-
-    }
-  },
-  avgCookies: function(){ // gives avg cookies sold/hr per customer
-    this.custAvg();
-    for (let i = 0; i < hours.length; i++){
-      let custAvg = Math.ceil(this.customer[i] * this.avg);
-      this.cookies.push(custAvg);
-      this.total = this.total + custAvg; // += can be replaced with + custAvg
-
-    }
-  },
-
-  render: function(){
-    this.avgCookies();
-    let base = document.getElementById('cities');
-    let city = document.createElement('ul');
-    base.appendChild(city);
-    let cityName3 = document.createElement('h1');
-    cityName3.textContent = this.storeName;
-    //console.log(cityName2);
-    city.appendChild(cityName3);
-    for(let i = 0; i < hours.length; i++){
-      let listItems = document.createElement('li'); // created loop and list items
-      listItems.textContent = hours[i] + ' : ' + this.cookies[i] + ' cookies';
-      city.appendChild(listItems);
-
-    }
-
-    let finalTotal = document.createElement('li');
-    finalTotal.textContent = 'total: ' + this.total;
-    city.appendChild(finalTotal);
-  }
+makeTableHead();
+for(let i = 0; i < allStores.length; i++){
+  allStores[i].render();
 }
-dubai.render();
-console.log(dubai.customer);
-console.log(dubai.total);
 
-let paris = {
-  storeName: 'Paris',
-  min: 20,
-  max: 38,
-  avg: 2.3,
-  customer:[], // avg/hour
-  cookies: [], // number of cookies
-  total: 0,
-  custAvg: function (){ // this function gives avg cust/hr
-    for (let i = 0; i < hours.length; i++){
-      // loop thru array
-      this.customer.push(Math.floor(Math.random() * (this.max - this.min) + this.min));
-
-    }
-  },
-  avgCookies: function(){ // gives avg cookies sold/hr per customer
-    this.custAvg();
-    for (let i = 0; i < hours.length; i++){
-      let custAvg = Math.ceil(this.customer[i] * this.avg);
-      this.cookies.push(custAvg);
-      this.total = this.total + custAvg; // += can be replaced with + custAvg
-
-    }
-  },
-
-  render: function(){
-    this.avgCookies();
-    let base = document.getElementById('cities');
-    let city = document.createElement('ul');
-    base.appendChild(city);
-    let cityName4 = document.createElement('h1');
-    cityName4.textContent = this.storeName;
-    //console.log(cityName2);
-    city.appendChild(cityName4);
-    for(let i = 0; i < hours.length; i++){
-      let listItems = document.createElement('li'); // created loop and list items
-      listItems.textContent = hours[i] + ' : ' + this.cookies[i] + ' cookies';
-      city.appendChild(listItems);
-
-    }
-
-    let finalTotal = document.createElement('li');
-    finalTotal.textContent = 'total: ' + this.total;
-    city.appendChild(finalTotal);
-  }
-}
-paris.render();
-console.log(paris.customer);
-console.log(paris.total);
-
-let lima = {
-  storeName: 'Lima',
-  min: 2,
-  max: 16,
-  avg: 4.6,
-  customer:[], // avg/hour
-  cookies: [], // number of cookies
-  total: 0,
-  custAvg: function (){ // this function gives avg cust/hr
-    for (let i = 0; i < hours.length; i++){
-      // loop thru array
-      this.customer.push(Math.floor(Math.random() * (this.max - this.min) + this.min));
-
-    }
-  },
-  avgCookies: function(){ // gives avg cookies sold/hr per customer
-    this.custAvg();
-    for (let i = 0; i < hours.length; i++){
-      let custAvg = Math.ceil(this.customer[i] * this.avg);
-      this.cookies.push(custAvg);
-      this.total = this.total + custAvg; // += can be replaced with + custAvg
-
-    }
-  },
-
-  render: function(){
-    this.avgCookies();
-    let base = document.getElementById('cities');
-    let city = document.createElement('ul');
-    base.appendChild(city);
-    let cityName5 = document.createElement('h1');
-    cityName5.textContent = this.storeName;
-    //console.log(cityName2);
-    city.appendChild(cityName5);
-    for(let i = 0; i < hours.length; i++){
-      let listItems = document.createElement('li'); // created loop and list items
-      listItems.textContent = hours[i] + ' : ' + this.cookies[i] + ' cookies';
-      city.appendChild(listItems);
-
-    }
-
-    let finalTotal = document.createElement('li');
-    finalTotal.textContent = 'total: ' + this.total;
-    city.appendChild(finalTotal);
-  }
-}
-lima.render();
-console.log(lima.customer);
-console.log(lima.total);
+// line 73 and 74 do the same as the lines below
+// seattle.render();
+// tokyo.render();
+// dubai.render();
+// paris.render();
+// lima.render();
