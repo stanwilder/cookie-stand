@@ -1,0 +1,26 @@
+body {
+  background-color: yellow;
+}
+
+body p {
+  font-size: 22px;
+  display: inline-block; 
+}
+
+nav {
+  text-align: center;
+}
+
+header nav a {
+  font-size: 50px;
+}
+
+img {
+  width: 300px;
+  height: 300px;
+  display: flex;
+}
+
+footer li {
+  font-size: 22px;
+}
