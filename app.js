@@ -81,7 +81,13 @@ for(let i = 0; i < allStores.length; i++){
   allStores[i].render();
 }
 
-// line 73 and 74 do the same as the lines below
+let theForm = document.getElementById();
+
+function submit(event){
+  event.preventDefault();
+}
+
+// line 72 and 73 do the same as the lines below
 // seattle.render();
 // tokyo.render();
 // dubai.render();
