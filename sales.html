@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="reset.css">
   <title>Salmon Cookies</title>
 </head>
 <body>
   <section id="cities"> </section>
   <table id="stores"></table>
+  <form>
+    <fieldset>
+      <legend>New Location</legend>
+      <label for="StoreName" name="StoreName">Store Name:</label>
+      <input id="StoreName" type="text">
+      <!-- event.target.StoreName.value -->
+      
+      <label for="i"></label>
+      <input type="text">
+    </fieldset>
+    <button type="submit">Submit</button>
+  </form>
 <script src="app.js"></script>
 </body>
 </html>
