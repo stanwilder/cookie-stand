@@ -8,15 +8,22 @@
 <body>
   <section id="cities"> </section>
   <table id="stores"></table>
-  <form>
+  <form id="form">
     <fieldset>
       <legend>New Location</legend>
-      <label for="StoreName" name="StoreName">Store Name:</label>
-      <input id="StoreName" type="text">
+      <!-- input has id label has for -->
+      <label for="StoreName" >Store Name:</label>
+      <input id="StoreName" type="text" name="StoreName">
       <!-- event.target.StoreName.value -->
+      <label for="min" >min:</label>
+      <input id="min" type="text" name="min">
       
-      <label for="i"></label>
-      <input type="text">
+      <label for="max" >max:</label>
+      <input id="max" type="text" name="max">
+
+      <label for="avg" >avg:</label>
+      <input id="avg" type="text" name="avg">
+      
     </fieldset>
     <button type="submit">Submit</button>
   </form>

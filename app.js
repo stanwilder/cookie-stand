@@ -81,11 +81,47 @@ for(let i = 0; i < allStores.length; i++){
   allStores[i].render();
 }
 
-let theForm = document.getElementById();
+let tFoot = document.createElement('tfoot');
+function makeTableFooter(){
+  let table = document.getElementById('stores');
+  table.appendChild(tFoot);
+  let trFoot = document.createElement('tr');
+  tFoot.appendChild(trFoot);
+  let totals = document.createElement('td');
+  totals.textContent = 'Totals';
+  trFoot.appendChild(totals);
 
-function submit(event){
-  event.preventDefault();
+  let grandTotals = 0;
+  for (let i = 0; i < hours.length; i++){
+    let hourlyTotals = 0;
+    for (let j = 0; j < allStores.length; j++){
+      hourlyTotals += allStores[j].cookies[i];
+      grandTotals += allStores[j].cookies[i];
+    }
+    let tableTotals = document.createElement('td');
+    tableTotals.textContent = hourlyTotals;
+    trFoot.appendChild(tableTotals);
+  }
+  let granddaddyCell = document.createElement('td');
+  granddaddyCell.textContent = grandTotals;
+  trFoot.appendChild(granddaddyCell);
 }
+makeTableFooter();
+
+let theForm = document.getElementById('form');
+
+function handleSubmit(event){
+  event.preventDefault();
+  let storeValue = event.target.StoreName.value;
+  let storeMin = +event.target.min.value;
+  let storeMax = +event.target.max.value;
+  let storeAvg = +event.target.max.value;
+  let newStore = new Stores(storeValue, storeMin, storeMax, storeAvg);
+  newStore.render();
+  tFoot.innerHTML = '';
+  makeTableFooter();
+}
+theForm.addEventListener('submit', handleSubmit);
 
 // line 72 and 73 do the same as the lines below
 // seattle.render();
